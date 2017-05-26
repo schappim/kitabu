@@ -41,7 +41,7 @@ module Kitabu
       def render_template(file, locals = {})
         context = OpenStruct.new(locals).extend(Helpers)
         file_content = File.read(file)
-        file_content.gsub!('[text_question_inline]','<%= text_question_inline do %>')
+        file_content.gsub!('[text_question_inline]','<% text_question_inline do %>')
         file_content.gsub!('[/text_question_inline]','<% end %>')
         
         ERB.new(file_content, 0, "%<>", "@_output").result context.instance_eval { binding }
